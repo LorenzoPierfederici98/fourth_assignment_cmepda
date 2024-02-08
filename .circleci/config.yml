@@ -1,25 +1,17 @@
 version: 2.1
 
+  orbs:
+    python: circleci/python@0.3.2
+
 jobs:
-  build:
-    working_directory: ~/circleci-python
-    docker:
-      - image: "circleci/python:3.6.4"
+  build-and-test:
+    executor: python/default
     steps:
       - checkout
-      - run: python3 src/main.py
-  test:
-    working_directory: ~/circleci-python
-    docker:
-      - image: "circleci/python:3.6.4"
-    steps:
-      - checkout
-      - run: python3 tests/pdf_test.py
+      - python/install-deps
+      - python/tests
 
 workflows:
-  build_and_test:
+  main:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - build-and-test
