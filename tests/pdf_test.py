@@ -25,7 +25,7 @@ from scipy.interpolate import InterpolatedUnivariateSpline
 # Add src to the list of directories the interpreter will search
 # for the required module. main.py mustn't be moved from src
 # directory
-sys.path.append(os.path.join(os.path.dirname(sys.path[0])))
+#sys.path.append(os.path.join(os.path.dirname(sys.path[0])))
 
 from src.main import ProbabilityDensityFunction
 
