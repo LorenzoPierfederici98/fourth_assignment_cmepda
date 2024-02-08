@@ -7,14 +7,14 @@ jobs:
       - image: "circleci/python:3.6.4"
     steps:
       - checkout
-      - run: python3 main.py
+      - run: python3 src/main.py
   test:
     working_directory: ~/circleci-python
     docker:
       - image: "circleci/python:3.6.4"
     steps:
       - checkout
-      - run: python3 pdf_test.py
+      - run: python3 tests/pdf_test.py
 
 workflows:
   build_and_test:
