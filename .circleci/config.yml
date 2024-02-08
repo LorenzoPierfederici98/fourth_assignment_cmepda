@@ -1,34 +1,25 @@
-# This config was automatically generated from your source code
-# Stacks detected: deps:python:.
 version: 2.1
-orbs:
-  python: circleci/python@2
+
 jobs:
-  test-python:
-    # Install dependencies and run tests
+  build:
+    working_directory: ~/circleci-python
     docker:
-      - image: cimg/python:3.8-node
+      - image: "circleci/python:3.6.4"
     steps:
       - checkout
-      - python/install-packages
-      - run:
-          name: Run tests
-          command: pytest --junitxml=junit.xml || ((($? == 5)) && echo 'Did not find any tests to run.')
-      - store_test_results:
-          path: junit.xml
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
+      - run: python3 main.py
+  test:
+    working_directory: ~/circleci-python
     docker:
-      - image: cimg/base:stable
+      - image: "circleci/python:3.6.4"
     steps:
-      # Replace this with steps to deploy to users
-      - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+      - checkout
+      - run: python3 pdf_test.py
+
 workflows:
-  build-and-test:
+  build_and_test:
     jobs:
-      - test-python
-    # - deploy:
-    #     requires:
-    #       - test-python
+      - build
+      - test:
+          requires:
+            - build
