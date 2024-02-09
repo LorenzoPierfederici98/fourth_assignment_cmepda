@@ -20,7 +20,10 @@ import sys
 import os
 import unittest
 import numpy as np
-from scipy.interpolate import InterpolatedUnivariateSpline
+import matplotlib.pyplot as plt
+# if the test is running in interactive mode (-i)
+if sys.flags.interactive:
+    plt.ion()
 
 # This adds src to the list of directories the interpreter will search
 # for the required module. main.py mustn't be moved from src
@@ -32,18 +35,50 @@ from src.main import ProbabilityDensityFunction
 class Testpdf(unittest.TestCase):
     """Class for unit-testing.
     """
-    def test_probability(self):
-        """Tests that the probability calculated with the class ProbabilityDensityFunction is equal to the one calculated with splines.
+    def _test_triangular_base(self, xmin=0., xmax=1.):
+        """Unit test with a triangular distribution.
         """
-        x = np.linspace(0, 1, 101)
-        y = 2 * x
-        x1 = 0.3
-        x2 = 0.5
-        testing_pdf = InterpolatedUnivariateSpline(x, y)
-        testing_integral = testing_pdf.integral(x1, x2)
+        x = np.linspace(xmin, xmax, 101)
+        y = 2. / (xmax - xmin)**2. * (x - xmin)
         pdf = ProbabilityDensityFunction(x, y)
-        integral = pdf.integral(x1, x2)
-        self.assertAlmostEqual(integral, testing_integral)
+
+        # Verify that the pdf normalization is one.
+        norm = pdf.integral(xmin, xmax)
+        self.assertAlmostEqual(norm, 1.0)
+
+        # Verify that the pdf, evaluated on the input x-grid, matches the
+        # input y values.
+        delta = abs(pdf(x) - y)
+        self.assertTrue((delta < 1e-10).all())
+
+        plt.figure('pdf triangular')
+        plt.plot(x, pdf(x))
+        plt.xlabel('x')
+        plt.ylabel('pdf(x)')
+
+        plt.figure('cdf triangular')
+        plt.plot(x, pdf.cdf(x))
+        plt.xlabel('x')
+        plt.ylabel('cdf(x)')
+
+        plt.figure('ppf triangular')
+        q = np.linspace(0., 1., 250)
+        plt.plot(q, pdf.ppf(q))
+        plt.xlabel('q')
+        plt.ylabel('ppf(q)')
+
+        plt.figure('Sampling triangular')
+        rnd = pdf.rnd(1000000)
+        plt.hist(rnd, bins=200)
+
+    def test_triangular(self):
+        """Uses _test_triangular_base to test triangular pdfs.
+        """
+        self._test_triangular_base(0., 1.)
+        self._test_triangular_base(0., 2.)
+        self._test_triangular_base(1., 2.)
+        
+
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(exit=not sys.flags.interactive)
