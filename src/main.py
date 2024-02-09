@@ -22,21 +22,32 @@ from scipy.interpolate import InterpolatedUnivariateSpline
 
 class ProbabilityDensityFunction(InterpolatedUnivariateSpline):
     """Class describing pdfs.
+    :param x: array of x values to be passed to the pdf
+    :type x: array
+    :param y: array of y values to be passed to the pdf
+    :type y: array
     """
 
     def __init__(self, x, y):
+        """Constructor method.
+        """
         InterpolatedUnivariateSpline.__init__(self, x, y)
         # Comulative density function cdf
         ycdf = np.array([self.integral(x[0], xcdf) for xcdf in x])
         self.cdf = InterpolatedUnivariateSpline(x, ycdf)
-        # ppf is the inverse of cdf: x = ppf(q), q uniformly distributed in [0,1], x distributed
-        # according to the pdf
+        # ppf is the inverse of cdf: x = ppf(q), q uniformly distributed in [0,# 1], x distributed according to the pdf
         xppf, ippf = np.unique(ycdf, return_index=True)
         yppf = x[ippf]
         self.ppf = InterpolatedUnivariateSpline(xppf, yppf)
 
     def probability(self, x1, x2):
         """Returns the probability for a random variabile to be included between x1 and x2.
+        :param x1: one bound for the integration
+        :type x1: float
+        :param x2: the other bound for the integration
+        :type x2: float
+        :return: probability bewteen x1 and x2
+        :rtype: float
         """
         if x1>x2:
             return self.cdf(x1)-self.cdf(x2)
@@ -44,7 +55,11 @@ class ProbabilityDensityFunction(InterpolatedUnivariateSpline):
             return self.cdf(x2)-self.cdf(x1)
 
     def rnd(self, size=1000):
-        """Returns an array of size size of random values form the pdf.
+        """Returns an array of random values from the pdf.
+        :param size: number of values to be extracted, defaults to 1000
+        :type size: int, optional
+        :return: array of values distributed according to the pdf
+        :rtype: array
         """
         return self.ppf(np.random.uniform(size=size))
 
