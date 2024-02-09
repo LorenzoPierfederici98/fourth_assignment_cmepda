@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath('../src'))
 # -- Project information -----------------------------------------------------
 
 project = 'Fourth assignment cmepda'
-copyright = '2024, Lorenzo Pierfederici'
-author = 'Lorenzo Pierfederici'
+copyright = u'2024, Lorenzo Pierfederici'
+author = u'Lorenzo Pierfederici'
 
 # The full version, including alpha/beta/rc tags
 release = '0.0.1'

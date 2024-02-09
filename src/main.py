@@ -1,20 +1,20 @@
-"""
-Copyright (C) 2024  Lorenzo Pierfederici
+# 
+# Copyright (C) 2024  Lorenzo Pierfederici
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-"""
+# 
 
 import numpy as np
 #import matplotlib.pyplot as plt
@@ -22,10 +22,14 @@ from scipy.interpolate import InterpolatedUnivariateSpline
 
 class ProbabilityDensityFunction(InterpolatedUnivariateSpline):
     """Class describing pdfs.
-    :param x: array of x values to be passed to the pdf
-    :type x: array
-    :param y: array of y values to be passed to the pdf
-    :type y: array
+
+    Parameters
+    ----------
+    x : array-like 
+        The array of x values to be passed to the pdf.
+
+    y : array-like
+        The array of y values to be passed to the pdf.
     """
 
     def __init__(self, x, y):
@@ -42,12 +46,19 @@ class ProbabilityDensityFunction(InterpolatedUnivariateSpline):
 
     def probability(self, x1, x2):
         """Returns the probability for a random variabile to be included between x1 and x2.
-        :param x1: one bound for the integration
-        :type x1: float
-        :param x2: the other bound for the integration
-        :type x2: float
-        :return: probability bewteen x1 and x2
-        :rtype: float
+
+        Parameters
+        ----------
+        x1 : float
+            One bound for the integration.
+
+        x2 : float
+            The other bound for the integration.
+
+        Returns
+        -------
+        float
+            The probability bewteen x1 and x2.
         """
         if x1>x2:
             return self.cdf(x1)-self.cdf(x2)
@@ -56,10 +67,16 @@ class ProbabilityDensityFunction(InterpolatedUnivariateSpline):
 
     def rnd(self, size=1000):
         """Returns an array of random values from the pdf.
-        :param size: number of values to be extracted, defaults to 1000
-        :type size: int, optional
-        :return: array of values distributed according to the pdf
-        :rtype: array
+
+        Parameters
+        ----------
+        size : int, optional
+            The number of values to be extracted, defaults to 1000.
+        
+        Returns
+        -------
+        array
+            The array of values distributed according to the pdf.
         """
         return self.ppf(np.random.uniform(size=size))
 

@@ -49,31 +49,50 @@ along with this program.  If not, see &lt;<a class="reference external" href="ht
 <dl class="py class">
 <dt class="sig sig-object py" id="main.ProbabilityDensityFunction">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">ProbabilityDensityFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.ProbabilityDensityFunction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class describing pdfs.
-:param x: array of x values to be passed to the pdf
-:type x: array
-:param y: array of y values to be passed to the pdf
-:type y: array</p>
+<dd><p>Class describing pdfs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array-like</em>) – The array of x values to be passed to the pdf.</p></li>
+<li><p><strong>y</strong> (<em>array-like</em>) – The array of y values to be passed to the pdf.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="main.ProbabilityDensityFunction.probability">
 <span class="sig-name descname"><span class="pre">probability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.ProbabilityDensityFunction.probability" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the probability for a random variabile to be included between x1 and x2.
-:param x1: one bound for the integration
-:type x1: float
-:param x2: the other bound for the integration
-:type x2: float
-:return: probability bewteen x1 and x2
-:rtype: float</p>
+<dd><p>Returns the probability for a random variabile to be included between x1 and x2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x1</strong> (<em>float</em>) – One bound for the integration.</p></li>
+<li><p><strong>x2</strong> (<em>float</em>) – The other bound for the integration.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The probability bewteen x1 and x2.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="main.ProbabilityDensityFunction.rnd">
 <span class="sig-name descname"><span class="pre">rnd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.ProbabilityDensityFunction.rnd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an array of random values from the pdf.
-:param size: number of values to be extracted, defaults to 1000
-:type size: int, optional
-:return: array of values distributed according to the pdf
-:rtype: array</p>
+<dd><p>Returns an array of random values from the pdf.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of values to be extracted, defaults to 1000.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The array of values distributed according to the pdf.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
