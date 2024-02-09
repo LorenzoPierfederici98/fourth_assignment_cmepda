@@ -5,6 +5,7 @@
 
 Welcome to Fourth assignment cmepda's documentation!
 ====================================================
+This package is based on the Python scientific ecosystem allowing to generate pseudo-random numbers with abitrary probability density functions. At his core there's a powerful ProbabilityDensityFunction class.
 
 .. automodule:: main
     :members:
