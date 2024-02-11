@@ -78,8 +78,6 @@ class Testpdf(unittest.TestCase):
         self._test_triangular_base(0., 1.)
         self._test_triangular_base(0., 2.)
         self._test_triangular_base(1., 2.)
-        
-
 
 if __name__ == '__main__':
     unittest.main(exit=not sys.flags.interactive)
